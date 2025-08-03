@@ -1,4 +1,4 @@
-# Universal Article Extractor 📰
+# Article Extractor 📰
 
 This API automatically extracts the main content of an article from any website using the Mozilla Readability library. It's ideal for anyone who wants to obtain only the relevant text from news pages, blogs, or editorial portals, removing ads and unnecessary content.
 
@@ -43,7 +43,7 @@ This API automatically extracts the main content of an article from any website 
 
 ## 📝 Notes
 
-Works well with most news sites, blogs, and editorial portals. Some particularly complex sites may not be fully supported.
+The extractor works well with most news websites, blogs, and editorial platforms. However, certain sites with complex layouts, multi-page articles, or dynamically loaded content (e.g. paywalls triggered after scrolling) may not be fully supported.
 
 ---
 
