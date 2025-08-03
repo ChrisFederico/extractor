@@ -19,8 +19,18 @@ This API automatically extracts the main content of an article from any website 
    ```bash
    npm start
    ```
+   or use `dev` if you want live reload
+
+   ```bash
+   npm run dev
+   ```
 
 4. **Usage:**
+
+   Open your browser and paste the link of the article in the text input and then click "Extract"
+
+   OR 
+
    Open your browser and visit:
    ```
    http://localhost:3000/extract?url=ARTICLE_URL
