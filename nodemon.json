@@ -1,0 +1,5 @@
+{
+  "watch": ["main.js", "routes.js", "extractor.js", "public/"],
+  "ext": "js,html",
+  "ignore": ["node_modules"]
+}
