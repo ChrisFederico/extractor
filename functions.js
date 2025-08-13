@@ -1,6 +1,13 @@
 const axios = require('axios');
 const { JSDOM } = require('jsdom');
 const { Readability } = require('@mozilla/readability');
+const fs = require('fs');
+const path = require('path');
+
+function loadTemplate(fileName) {
+  const filePath = path.join(__dirname + '/templates/', fileName);
+  return fs.readFileSync(filePath, 'utf8');
+}
 
 async function extractGenericArticle(url) {
   try {
@@ -16,40 +23,17 @@ async function extractGenericArticle(url) {
       throw new Error("Impossibile estrarre l'articolo.");
     }
 
-    const htmlTemplate = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>${article.title}</title>
-  <style>
-    body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 20px; }
-    h1 { font-size: 24px; color: #333; }
-    a { color: #0066cc; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-  </style>
-</head>
-<body>
-  <h1>${article.title}</h1>
-  ${article.content}
-  <p><small>Articolo estratto da: <a href="${url}">${url}</a></small></p>
-</body>
-</html>`;
-    
+    let htmlTemplate = loadTemplate('article.html');
+    htmlTemplate = htmlTemplate
+      .replace(/{{title}}/g, article.title)
+      .replace(/{{content}}/g, article.content)
+      .replace(/{{url}}/g, url);
+
     return htmlTemplate;
   } catch (err) {
-    return `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Errore</title>
-</head>
-<body>
-  <h1>Errore durante l'estrazione</h1>
-  <p>${err.message}</p>
-</body>
-</html>`;
+    let errorTemplate = loadTemplate('error.html');
+    errorTemplate = errorTemplate.replace(/{{errorMessage}}/g, err.message);
+    return errorTemplate;
   }
 }
 
